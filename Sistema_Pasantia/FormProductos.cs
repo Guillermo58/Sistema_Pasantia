@@ -16,5 +16,6 @@ namespace Sistema_Pasantia
         {
             InitializeComponent();
         }
+
     }
 }
