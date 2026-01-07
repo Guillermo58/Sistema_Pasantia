@@ -136,7 +136,36 @@ namespace Sistema_Pasantia
             }
         }
 
-        
+        private void Eliminar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Desea eliminar este producto?", "Confirmar",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    string sql = "DELETE FROM Producto WHERE Codigo=@Codigo";
+
+                    SqlCommand cmd = new SqlCommand(sql, conexion);
+                    cmd.Parameters.AddWithValue("@Codigo", txtCodigo.Text);
+
+                    conexion.Open();
+                    int fila = cmd.ExecuteNonQuery();
+                    conexion.Close();
+
+                    CargarProductos();
+                    LimpiarCampos();
+                    if (fila > 0)
+                        MessageBox.Show("Producto eliminado correctamente");
+                    else
+                        MessageBox.Show("No se encontro ese producto con ese codigo");
+                }
+                catch (Exception ex)
+                {
+                    conexion.Close();
+                    MessageBox.Show("Error al eliminar: " + ex.Message);
+                }
+            }
+        }
 
         void LimpiarCampos()
         {
