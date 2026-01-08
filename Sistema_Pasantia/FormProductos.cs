@@ -22,6 +22,7 @@ namespace Sistema_Pasantia
         public FormProductos()
         {
             InitializeComponent();
+            Application.Exit();
         }
 
         private void FormProductos_Load(object sender, EventArgs e)
@@ -175,7 +176,45 @@ namespace Sistema_Pasantia
             txtExistencia.Clear();
             txtEstado.Clear();
             txtProveedor.Clear();
+            txtFiltroNombre.Clear();
+            txtFiltroProveedor.Clear();
         }
 
+
+        private void FormProductos_Load_1(object sender, EventArgs e)
+        {
+            
+            this.productoTableAdapter.Fill(this.practica_PasanteDataSet.Producto);
+
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=MSI\\SQLEXPRESS;Initial Catalog=Practica_Pasante;Integrated Security=True;TrustServerCertificate=True"))
+                {
+                    con.Open();
+                    string query = "SELECT * FROM Producto WHERE Nombre LIKE @nombre " + "AND Estado = @estado " + "AND Proveedor LIKE @proveedor";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@nombre", "%" + txtFiltroNombre.Text + "%");
+                    cmd.Parameters.AddWithValue("@estado", cmbEstado.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@proveedor", "%" + txtFiltroProveedor.Text + "%");
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    dataGridView1.DataSource = dt;
+                    LimpiarCampos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al filtrar: " + ex.Message);
+            }
+
+        }
     }
 }
