@@ -21,8 +21,9 @@ namespace Sistema_Pasantia
 
         public FormProductos()
         {
+
             InitializeComponent();
-            Application.Exit();
+
         }
 
         private void FormProductos_Load(object sender, EventArgs e)
@@ -215,6 +216,11 @@ namespace Sistema_Pasantia
                 MessageBox.Show("Error al filtrar: " + ex.Message);
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
