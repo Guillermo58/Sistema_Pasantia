@@ -11,6 +11,11 @@ Plataforma: Windows Forms (.NET Framework)
 Base de datos: SQL Server
 Acceso a datos: System.Data.SqlClient
 
+Para acceder 
+Usuario: Roger
+Contraseña: admin 
+
+
 Estructura de la base de datos
 
 Tabla principal utilizada:
