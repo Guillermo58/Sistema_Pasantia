@@ -21,13 +21,6 @@ Estructura de la base de datos
 # Tabla principal utilizada:
 
 Tabla: Producto
-	•	ID_Producto (INT, IDENTITY, PRIMARY KEY)
-	•	Codigo (NVARCHAR, UNIQUE, NOT NULL)
-	•	Nombre (NVARCHAR)
-	•	Existencia (INT)
-	•	Estado (NVARCHAR)
-	•	Proveedor (NVARCHAR)
-
 El campo ID_Producto es autoincremental y es gestionado únicamente por la base de datos.
 
 # Funcionalidades del sistema
